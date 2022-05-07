@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 function SignUp() {
   const { signUp } = useAuth();
 
-  function handleSubmit(event) {
+  function handleSubmit(event: any) {
     event.preventDefault();
     const { email, password, confirmPassword, firstName, lastName } =
       event.target;

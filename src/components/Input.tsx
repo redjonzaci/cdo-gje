@@ -1,4 +1,12 @@
-export default function Input({ id, label, type }) {
+export default function Input({
+  id,
+  label,
+  type,
+}: {
+  id: string;
+  label: string;
+  type?: string;
+}) {
   return (
     <>
       <label htmlFor={id}>{label}</label>
