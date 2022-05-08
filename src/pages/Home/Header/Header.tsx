@@ -6,7 +6,7 @@ function Header() {
   return (
     <header>
       <nav>
-        <h1>Dhuro</h1>
+        <h1>Cdo Gje</h1>
         <ul>
           <li>
             <a>Hyr</a>
