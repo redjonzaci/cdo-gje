@@ -1,14 +1,9 @@
 import Input from '../../components/Input';
-import { useAuth } from '../../contexts/AuthContext';
 
 function Login() {
-  const { signIn } = useAuth();
-
   function handleSubmit(event: any) {
     event.preventDefault();
     const { email, password } = event.target;
-
-    signIn(email.value, password.value);
   }
 
   return (

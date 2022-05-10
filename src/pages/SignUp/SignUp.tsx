@@ -1,16 +1,12 @@
 import Input from '../../components/Input';
-import { useAuth } from '../../contexts/AuthContext';
 
 function SignUp() {
-  const { signUp } = useAuth();
-
   function handleSubmit(event: any) {
     event.preventDefault();
     const { email, password, confirmPassword, firstName, lastName } =
       event.target;
     if (password.value === confirmPassword.value) {
       try {
-        signUp(email.value, password.value);
         fetch('http://localhost:3001/users', {
           method: 'POST',
           mode: 'cors',
