@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import Badge from '@geist-ui/core/esm/badge';
 import Button from '@geist-ui/core/esm/button';
 import ButtonGroup from '@geist-ui/core/esm/button-group';
 import Card from '@geist-ui/core/esm/card';
@@ -62,7 +63,9 @@ function Home() {
   return (
     <>
       <Grid.Container direction="column" alignItems="center">
-        <Text h1>Cdo Gje</Text>
+        <Text h1>
+          Cdo Gje <Badge type="warning">Beta</Badge>
+        </Text>
         <Input
           iconRight={<CornerDownLeft />}
           onKeyDown={handleEnter}
