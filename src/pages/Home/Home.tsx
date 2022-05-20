@@ -15,23 +15,25 @@ function Home() {
   const items = Array.apply(null, Array(64)).map((item, index) => {
     return { index };
   });
-  const itemsPerPage = 8;
+  const rowsPerPage = 8;
 
   const [itemWidth, setItemWidth] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(rowsPerPage);
 
   function changeLayout(event: MouseEvent) {
     const button = event.target as HTMLElement;
-    const itemsInRow = button.innerText;
+    let itemsInRow = parseInt(button.innerText);
+    setItemsPerPage(itemsInRow * rowsPerPage);
 
     switch (itemsInRow) {
-      case '1':
+      case 1:
         setItemWidth(0);
         break;
-      case '2':
+      case 2:
         setItemWidth(10);
         break;
-      case '4':
+      case 4:
         setItemWidth(5);
         break;
     }
