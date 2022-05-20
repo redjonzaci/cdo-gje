@@ -1,4 +1,4 @@
-import { Button } from '@geist-ui/core';
+import Button from '@geist-ui/core/esm/button';
 import CssBaseline from '@geist-ui/core/esm/css-baseline';
 import GeistProvider from '@geist-ui/core/esm/geist-provider';
 import Grid from '@geist-ui/core/esm/grid';
