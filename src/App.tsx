@@ -20,14 +20,13 @@ function App() {
         <CssBaseline />
         <Grid.Container justify="flex-end">
           <Button
+            aria-hidden
             auto
-            iconRight={themeType === 'light' ? <Moon /> : <Sun />}
+            icon={themeType === 'light' ? <Moon /> : <Sun />}
             marginRight={1}
             marginTop={1}
             onClick={switchThemes}
-          >
-            {themeType === 'light' ? 'Nate' : 'Dite'}
-          </Button>
+          />
         </Grid.Container>
         <Home />
       </GeistProvider>
