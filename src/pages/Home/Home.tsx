@@ -1,8 +1,10 @@
+import { css } from '@emotion/css';
 import Button from '@geist-ui/core/esm/button';
 import ButtonGroup from '@geist-ui/core/esm/button-group';
 import Card from '@geist-ui/core/esm/card';
 import Grid from '@geist-ui/core/esm/grid';
 import Input from '@geist-ui/core/esm/input';
+import Pagination from '@geist-ui/core/esm/pagination';
 import Spacer from '@geist-ui/core/esm/spacer';
 import Text from '@geist-ui/core/esm/text';
 import CornerDownLeft from '@geist-ui/icons/cornerDownLeft';
@@ -13,7 +15,11 @@ function Home() {
   const items = Array.apply(null, Array(64)).map((item, index) => {
     return { index };
   });
+  const itemsPerPage = 8;
+
   const [itemWidth, setItemWidth] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
+
   function changeLayout(event: MouseEvent) {
     const button = event.target as HTMLElement;
     const itemsInRow = button.innerText;
@@ -72,8 +78,22 @@ function Home() {
             <Button onClick={changeLayout}>4</Button>
           </ButtonGroup>
           <Grid.Container gap={2} justify="center">
-            {generateListOf(items)}
+            {generateListOf(items).slice(
+              (pageNumber - 1) * itemsPerPage,
+              pageNumber * itemsPerPage
+            )}
           </Grid.Container>
+          <Spacer />
+          <Pagination
+            count={items.length / itemsPerPage}
+            onChange={(newPageNumber) => setPageNumber(newPageNumber)}
+            page={pageNumber}
+            className={css({
+              'li button:not([class*=active]):focus': {
+                backgroundColor: 'rgba(0, 112, 243, 0.1)',
+              },
+            })}
+          />
         </Grid.Container>
       </Grid.Container>
     </>
