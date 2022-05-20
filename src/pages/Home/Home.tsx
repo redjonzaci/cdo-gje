@@ -59,15 +59,18 @@ function Home() {
 
   return (
     <>
-      <Text h1>Cdo Gje</Text>
-      <Input
-        iconRight={<CornerDownLeft />}
-        onKeyDown={handleEnter}
-        placeholder="Shtepi, Pune, Makina, ..."
-      />
-      <Button icon={<Search />} onClick={handleClick}>
-        Kerko
-      </Button>
+      <Grid.Container direction="column" alignItems="center">
+        <Text h1>Cdo Gje</Text>
+        <Input
+          iconRight={<CornerDownLeft />}
+          onKeyDown={handleEnter}
+          placeholder="Shtepi, Pune, Makina, ..."
+        />
+        <Spacer />
+        <Button icon={<Search />} onClick={handleClick}>
+          Kerko
+        </Button>
+      </Grid.Container>
       <Spacer />
       <Grid.Container gap={2}>
         <Grid xs={8} width={100}></Grid>
