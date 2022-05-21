@@ -18,9 +18,9 @@ function Home() {
   });
   const rowsPerPage = 8;
 
-  const [itemWidth, setItemWidth] = useState(0);
+  const [itemWidth, setItemWidth] = useState(10);
   const [pageNumber, setPageNumber] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(rowsPerPage);
+  const [itemsPerPage, setItemsPerPage] = useState(2 * rowsPerPage);
 
   function changeLayout(event: MouseEvent) {
     const button = event.target as HTMLElement;
@@ -28,9 +28,6 @@ function Home() {
     setItemsPerPage(itemsInRow * rowsPerPage);
 
     switch (itemsInRow) {
-      case 1:
-        setItemWidth(0);
-        break;
       case 2:
         setItemWidth(10);
         break;
@@ -43,7 +40,7 @@ function Home() {
   function generateListOf(items: any[]) {
     return items.map((items, index) => {
       return (
-        <Grid key={index} xs={itemWidth || 20}>
+        <Grid key={index} xs={itemWidth}>
           <Card width={100}>{index}</Card>
         </Grid>
       );
@@ -77,11 +74,9 @@ function Home() {
         </Button>
       </Grid.Container>
       <Spacer />
-      <Grid.Container gap={2}>
-        <Grid xs={8} width={100}></Grid>
-        <Grid.Container xs={16} direction="column" alignItems="center">
+      <Grid.Container gap={2} justify="center">
+        <Grid.Container xs={20} direction="column" alignItems="center">
           <ButtonGroup>
-            <Button onClick={changeLayout}>1</Button>
             <Button onClick={changeLayout}>2</Button>
             <Button onClick={changeLayout}>4</Button>
           </ButtonGroup>
