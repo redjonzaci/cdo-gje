@@ -9,10 +9,17 @@ import Pagination from '@geist-ui/core/esm/pagination';
 import Spacer from '@geist-ui/core/esm/spacer';
 import Text from '@geist-ui/core/esm/text';
 import CornerDownLeft from '@geist-ui/icons/cornerDownLeft';
+import Moon from '@geist-ui/icons/moon';
 import Search from '@geist-ui/icons/search';
-import { KeyboardEvent, MouseEvent, useState } from 'react';
+import Sun from '@geist-ui/icons/sun';
 
-function Home() {
+function Home({
+  themeType,
+  switchThemes,
+}: {
+  themeType: string;
+  switchThemes: MouseEventHandler;
+}) {
   const items = Array.apply(null, Array(64)).map((item, index) => {
     return { index };
   });
@@ -59,6 +66,13 @@ function Home() {
 
   return (
     <>
+        <Button
+          aria-hidden
+          auto
+          icon={themeType === 'light' ? <Moon /> : <Sun />}
+          marginRight={1}
+          onClick={switchThemes}
+        />
       <Grid.Container direction="column" alignItems="center">
         <Text h1>
           Cdo Gje <Badge type="warning">Beta</Badge>
