@@ -1,9 +1,5 @@
-import Button from '@geist-ui/core/esm/button';
 import CssBaseline from '@geist-ui/core/esm/css-baseline';
 import GeistProvider from '@geist-ui/core/esm/geist-provider';
-import Grid from '@geist-ui/core/esm/grid';
-import Moon from '@geist-ui/icons/moon';
-import Sun from '@geist-ui/icons/sun';
 import { useState } from 'react';
 import './App.css';
 import Home from './pages/Home';
@@ -18,17 +14,7 @@ function App() {
     <>
       <GeistProvider themeType={themeType}>
         <CssBaseline />
-        <Grid.Container justify="flex-end">
-          <Button
-            aria-hidden
-            auto
-            icon={themeType === 'light' ? <Moon /> : <Sun />}
-            marginRight={1}
-            marginTop={1}
-            onClick={switchThemes}
-          />
-        </Grid.Container>
-        <Home />
+        <Home themeType={themeType} switchThemes={switchThemes} />
       </GeistProvider>
     </>
   );
