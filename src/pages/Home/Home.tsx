@@ -1,17 +1,20 @@
 import { css } from '@emotion/css';
 import Badge from '@geist-ui/core/esm/badge';
 import Button from '@geist-ui/core/esm/button';
-import ButtonGroup from '@geist-ui/core/esm/button-group';
 import Card from '@geist-ui/core/esm/card';
+import Description from '@geist-ui/core/esm/description';
+import Drawer from '@geist-ui/core/esm/drawer';
 import Grid from '@geist-ui/core/esm/grid';
 import Input from '@geist-ui/core/esm/input';
 import Pagination from '@geist-ui/core/esm/pagination';
+import Radio from '@geist-ui/core/esm/radio';
 import Spacer from '@geist-ui/core/esm/spacer';
 import Text from '@geist-ui/core/esm/text';
 import CornerDownLeft from '@geist-ui/icons/cornerDownLeft';
 import Moon from '@geist-ui/icons/moon';
 import Search from '@geist-ui/icons/search';
 import Sun from '@geist-ui/icons/sun';
+import { KeyboardEvent, MouseEvent, MouseEventHandler, useState } from 'react';
 
 function Home({
   themeType,
@@ -28,10 +31,10 @@ function Home({
   const [itemWidth, setItemWidth] = useState(10);
   const [pageNumber, setPageNumber] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(2 * rowsPerPage);
+  const [isSettingsVisible, setIsSettingsVisible] = useState(false);
 
-  function changeLayout(event: MouseEvent) {
-    const button = event.target as HTMLElement;
-    let itemsInRow = parseInt(button.innerText);
+  function changeLayout(value: any) {
+    let itemsInRow = parseInt(value);
     setItemsPerPage(itemsInRow * rowsPerPage);
 
     switch (itemsInRow) {
@@ -66,6 +69,10 @@ function Home({
 
   return (
     <>
+      <Grid.Container justify="flex-end" marginTop={1}>
+        <Button auto marginRight={1} onClick={() => setIsSettingsVisible(true)}>
+          Preferencat
+        </Button>
         <Button
           aria-hidden
           auto
@@ -73,6 +80,7 @@ function Home({
           marginRight={1}
           onClick={switchThemes}
         />
+      </Grid.Container>
       <Grid.Container direction="column" alignItems="center">
         <Text h1>
           Cdo Gje <Badge type="warning">Beta</Badge>
@@ -90,10 +98,6 @@ function Home({
       <Spacer />
       <Grid.Container gap={2} justify="center">
         <Grid.Container xs={20} direction="column" alignItems="center">
-          <ButtonGroup>
-            <Button onClick={changeLayout}>2</Button>
-            <Button onClick={changeLayout}>4</Button>
-          </ButtonGroup>
           <Grid.Container gap={2} justify="center">
             {generateListOf(items).slice(
               (pageNumber - 1) * itemsPerPage,
@@ -113,6 +117,36 @@ function Home({
           />
         </Grid.Container>
       </Grid.Container>
+      <Drawer
+        visible={isSettingsVisible}
+        onClose={() => setIsSettingsVisible(false)}
+      >
+        <Drawer.Title>Preferencat</Drawer.Title>
+        <Drawer.Content>
+          <Grid.Container direction="column">
+            <Description title="Postime per rresht" />
+            <Radio.Group
+              value={`${20 / itemWidth}`}
+              onChange={changeLayout}
+              scale={1.5}
+            >
+              <Grid.Container justify="space-evenly" alignItems="flex-start">
+                <Radio value="2">2</Radio>
+                <Radio
+                  className={css({
+                    '.radio-group div.radio&': {
+                      marginTop: '0',
+                    },
+                  })}
+                  value="4"
+                >
+                  4
+                </Radio>
+              </Grid.Container>
+            </Radio.Group>
+          </Grid.Container>
+        </Drawer.Content>
+      </Drawer>
     </>
   );
 }
