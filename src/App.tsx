@@ -1,5 +1,3 @@
-import CssBaseline from '@geist-ui/core/esm/css-baseline';
-import GeistProvider from '@geist-ui/core/esm/geist-provider';
 import { useState } from 'react';
 import './App.css';
 import Home from './pages/Home';
@@ -12,10 +10,7 @@ function App() {
 
   return (
     <>
-      <GeistProvider themeType={themeType}>
-        <CssBaseline />
-        <Home themeType={themeType} switchThemes={switchThemes} />
-      </GeistProvider>
+      <Home themeType={themeType} switchThemes={switchThemes} />
     </>
   );
 }
