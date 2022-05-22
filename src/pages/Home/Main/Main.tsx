@@ -2,18 +2,26 @@ import { css } from '@emotion/css';
 import Search from '@mui/icons-material/Search';
 import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import Pagination from '@mui/material/Pagination';
 import { KeyboardEvent, MouseEvent, useState } from 'react';
+import PostForm from '../../PostForm';
 
 function Main({
   itemsPerPage,
   itemWidth,
+  isPostFormVisible,
+  setIsPostFormVisible,
 }: {
   itemsPerPage: number;
   itemWidth: number;
+  isPostFormVisible: boolean;
+  setIsPostFormVisible: Function;
 }) {
   const items = Array.apply(null, Array(64)).map((item, index) => {
     return { index };
@@ -81,6 +89,22 @@ function Main({
           />
         </Grid>
       </Container>
+      <Dialog
+        keepMounted
+        onClose={() => setIsPostFormVisible(false)}
+        open={isPostFormVisible}
+      >
+        <Container maxWidth="lg">
+          <Grid container justifyContent="center">
+            <Grid item>
+              <DialogTitle>Shto nje postim te ri</DialogTitle>
+              <DialogContent>
+                <PostForm />
+              </DialogContent>
+            </Grid>
+          </Grid>
+        </Container>
+      </Dialog>
     </main>
   );
 }
