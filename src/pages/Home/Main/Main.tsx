@@ -1,5 +1,8 @@
 import { css } from '@emotion/css';
 import Search from '@mui/icons-material/Search';
+import Card from '@mui/material/Card';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import { KeyboardEvent, MouseEvent, useState } from 'react';
@@ -19,7 +22,11 @@ function Main({
 
   function generateListOf(items: any[]) {
     return items.map((items, index) => {
-      return { index };
+      return (
+        <Grid item xs={itemWidth}>
+          <Card>{index}</Card>
+        </Grid>
+      );
     });
   }
 
@@ -35,6 +42,8 @@ function Main({
 
   return (
     <main>
+      <Container maxWidth="xl">
+        <Grid container direction="column" alignItems="center">
           <h1>Cdo Gje</h1>
           <div
             className={css({
@@ -57,6 +66,11 @@ function Main({
               <Search />
             </IconButton>
           </div>
+          <Grid container justifyContent="center" spacing={2}>
+            {generateListOf(items)}
+          </Grid>
+        </Grid>
+      </Container>
     </main>
   );
 }
