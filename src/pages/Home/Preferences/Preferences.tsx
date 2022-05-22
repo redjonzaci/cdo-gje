@@ -37,28 +37,26 @@ function Preferences({
   }
 
   return (
-    <aside>
-      <Drawer
-        anchor="right"
-        onClose={() => setIsSettingsVisible(false)}
-        open={isSettingsVisible}
-      >
-        <List>
-          <ListItem>
-            <FormControl>
-              <FormLabel>Postime per rresht</FormLabel>
-              <RadioGroup
-                value={10 / itemWidth}
-                onChange={(event) => changeLayout(event.target.value)}
-              >
-                <FormControlLabel value="2" control={<Radio />} label="2" />
-                <FormControlLabel value="4" control={<Radio />} label="4" />
-              </RadioGroup>
-            </FormControl>
-          </ListItem>
-        </List>
-      </Drawer>
-    </aside>
+    <Drawer
+      anchor="right"
+      onClose={() => setIsSettingsVisible(false)}
+      open={isSettingsVisible}
+    >
+      <List>
+        <ListItem>
+          <FormControl>
+            <FormLabel>Postime per rresht</FormLabel>
+            <RadioGroup
+              value={10 / itemWidth}
+              onChange={(event) => changeLayout(event.target.value)}
+            >
+              <FormControlLabel value="2" control={<Radio />} label="2" />
+              <FormControlLabel value="4" control={<Radio />} label="4" />
+            </RadioGroup>
+          </FormControl>
+        </ListItem>
+      </List>
+    </Drawer>
   );
 }
 
