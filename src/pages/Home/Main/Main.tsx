@@ -1,4 +1,7 @@
 import { css } from '@emotion/css';
+import Search from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
+import Input from '@mui/material/Input';
 import { KeyboardEvent, MouseEvent, useState } from 'react';
 
 function Main({
@@ -32,7 +35,28 @@ function Main({
 
   return (
     <main>
-      <h1>Cdo Gje</h1>
+          <h1>Cdo Gje</h1>
+          <div
+            className={css({
+              '&': {
+                marginBottom: '1rem',
+              },
+            })}
+          >
+            <Input
+              autoFocus
+              placeholder="Kerko"
+              inputProps={{ 'aria-label': 'Kerko' }}
+              onKeyDown={handleEnter}
+            />
+            <IconButton
+              sx={{ padding: '10px' }}
+              aria-label="Kerko"
+              onClick={handleClick}
+            >
+              <Search />
+            </IconButton>
+          </div>
     </main>
   );
 }
