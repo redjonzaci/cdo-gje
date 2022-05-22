@@ -30,7 +30,11 @@ function Main({
     alert('Duke kerkuar...');
   }
 
-  return <main></main>;
+  return (
+    <main>
+      <h1>Cdo Gje</h1>
+    </main>
+  );
 }
 
 export default Main;
