@@ -5,6 +5,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
+import Pagination from '@mui/material/Pagination';
 import { KeyboardEvent, MouseEvent, useState } from 'react';
 
 function Main({
@@ -66,9 +67,18 @@ function Main({
               <Search />
             </IconButton>
           </div>
-          <Grid container justifyContent="center" spacing={2}>
-            {generateListOf(items)}
+          <Grid container justifyContent="center" spacing={2} marginBottom={2}>
+            {generateListOf(items).slice(
+              (pageNumber - 1) * itemsPerPage,
+              pageNumber * itemsPerPage
+            )}
           </Grid>
+          <Pagination
+            count={items.length / itemsPerPage}
+            onChange={(event, newPageNumber) => {
+              setPageNumber(newPageNumber);
+            }}
+          />
         </Grid>
       </Container>
     </main>
