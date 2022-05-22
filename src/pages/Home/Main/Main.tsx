@@ -23,7 +23,7 @@ function Main({
   function generateListOf(items: any[]) {
     return items.map((items, index) => {
       return (
-        <Grid item xs={itemWidth}>
+        <Grid item key={index} xs={itemWidth}>
           <Card>{index}</Card>
         </Grid>
       );
