@@ -12,7 +12,7 @@ function Home({
 }) {
   const rowsPerPage = 8;
 
-  const [itemWidth, setItemWidth] = useState(10);
+  const [itemWidth, setItemWidth] = useState(5);
   const [itemsPerPage, setItemsPerPage] = useState(2 * rowsPerPage);
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
 

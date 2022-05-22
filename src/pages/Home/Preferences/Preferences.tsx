@@ -21,10 +21,10 @@ function Preferences({
 
     switch (itemsInRow) {
       case 2:
-        setItemWidth(10);
+        setItemWidth(5);
         break;
       case 4:
-        setItemWidth(5);
+        setItemWidth(2.5);
         break;
     }
   }
