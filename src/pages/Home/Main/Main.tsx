@@ -29,6 +29,8 @@ function Main({
 
   const [pageNumber, setPageNumber] = useState(1);
 
+  let numberOfPages = Math.ceil(items.length / itemsPerPage) || 1;
+
   function generateListOf(items: any[]) {
     return items.map((items, index) => {
       return (
@@ -82,7 +84,7 @@ function Main({
             )}
           </Grid>
           <Pagination
-            count={items.length / itemsPerPage}
+            count={numberOfPages}
             onChange={(event, newPageNumber) => {
               setPageNumber(newPageNumber);
             }}
