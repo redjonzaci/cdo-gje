@@ -1,7 +1,8 @@
+import Head from 'next/head';
 import { MouseEventHandler, useState } from 'react';
-import Header from './Header';
-import Main from './Main';
-import Preferences from './Preferences';
+import Header from './components/Header';
+import Main from './components/Main';
+import Preferences from './components/Preferences';
 
 function Home({
   themeType,
@@ -19,6 +20,10 @@ function Home({
 
   return (
     <>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <title>Cdo Gje</title>
+      </Head>
       <Header
         themeType={themeType}
         switchThemes={switchThemes}
