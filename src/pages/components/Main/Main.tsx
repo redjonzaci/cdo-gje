@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import Pagination from '@mui/material/Pagination';
 import { KeyboardEvent, MouseEvent, useState } from 'react';
-import PostForm from '../../PostForm';
+import PostForm from './PostForm';
 
 function Main({
   itemsPerPage,
