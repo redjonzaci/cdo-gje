@@ -32,7 +32,7 @@ function Main({
   let numberOfPages = Math.ceil(items.length / itemsPerPage) || 1;
 
   function generateListOf(items: any[]) {
-    return items.map((items, index) => {
+    return items.map((item, index) => {
       return (
         <Grid item key={index} xs={itemWidth}>
           <Card>{index}</Card>
