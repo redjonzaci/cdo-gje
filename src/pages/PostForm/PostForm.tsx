@@ -16,7 +16,6 @@ export default function PostForm() {
           label="Pershkrimi"
           multiline
           rows={5}
-          maxRows={10}
           variant="filled"
         />
       </FormControl>
