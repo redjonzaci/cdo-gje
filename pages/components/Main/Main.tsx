@@ -29,10 +29,13 @@ function Main({
 
   const [pageNumber, setPageNumber] = useState(1);
 
-  let numberOfPages = Math.ceil(items.length / itemsPerPage) || 1;
+  let numberOfPages = 1;
+  if (items) {
+    numberOfPages = Math.ceil(items.length / itemsPerPage);
+  }
 
   function generateListOf(items: any[]) {
-    return items.map((item, index) => {
+    return items && items.map((item, index) => {
       return (
         <Grid item key={index} xs={itemWidth}>
           <Card>{index}</Card>
@@ -77,12 +80,19 @@ function Main({
               <Search />
             </IconButton>
           </div>
-          <Grid container justifyContent="center" spacing={2} marginBottom={2}>
-            {generateListOf(items).slice(
-              (pageNumber - 1) * itemsPerPage,
-              pageNumber * itemsPerPage
-            )}
-          </Grid>
+          {items && (
+            <Grid
+              container
+              justifyContent="center"
+              spacing={2}
+              marginBottom={2}
+            >
+              {generateListOf(items).slice(
+                (pageNumber - 1) * itemsPerPage,
+                pageNumber * itemsPerPage
+              )}
+            </Grid>
+          )}
           <Pagination
             count={numberOfPages}
             onChange={(event, newPageNumber) => {
