@@ -13,20 +13,18 @@ import { KeyboardEvent, MouseEvent, useState } from 'react';
 import PostForm from './PostForm';
 
 function Main({
+  items,
   itemsPerPage,
   itemWidth,
   isPostFormVisible,
   setIsPostFormVisible,
 }: {
+  items: any[];
   itemsPerPage: number;
   itemWidth: number;
   isPostFormVisible: boolean;
   setIsPostFormVisible: Function;
 }) {
-  const items = Array.apply(null, Array(64)).map((item, index) => {
-    return { index };
-  });
-
   const [pageNumber, setPageNumber] = useState(1);
 
   let numberOfPages = 1;
