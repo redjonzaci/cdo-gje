@@ -1,13 +1,16 @@
 import Head from 'next/head';
 import { MouseEventHandler, useState } from 'react';
+import prisma from '../lib/prisma';
 import Header from './components/Header';
 import Main from './components/Main';
 import Preferences from './components/Preferences';
 
 function Home({
+  items,
   themeType,
   switchThemes,
 }: {
+  items: any[];
   themeType: string;
   switchThemes: MouseEventHandler;
 }) {
@@ -31,6 +34,7 @@ function Home({
         setIsSettingsVisible={setIsSettingsVisible}
       />
       <Main
+        items={items}
         itemsPerPage={itemsPerPage}
         itemWidth={itemWidth}
         isPostFormVisible={isPostFormVisible}
@@ -49,3 +53,11 @@ function Home({
 }
 
 export default Home;
+
+export async function getServerSideProps() {
+  const items = await prisma.house.findMany();
+
+  return {
+    props: { items },
+  };
+}

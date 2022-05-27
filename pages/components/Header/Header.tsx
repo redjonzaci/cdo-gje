@@ -23,7 +23,7 @@ function Header({
             onClick={() => setIsPostFormVisible(true)}
             variant="contained"
           >
-            Shto postim
+            Posto
           </Button>
         </Grid>
         <Grid item marginRight={2}>
