@@ -2,19 +2,6 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  for (let i = 0; i < 50; i++) {
-    await prisma.house.create({
-      data: {
-        cityId: 1,
-        houseTypeId: 2,
-        houseCategoryId: 2,
-        surface: 66,
-        price: 350,
-        currencyId: 2,
-      },
-    });
-  }
-
   await prisma.city.createMany({
     data: [
       {
@@ -109,6 +96,19 @@ async function main() {
       },
     ],
   });
+
+  for (let i = 0; i < 50; i++) {
+    await prisma.house.create({
+      data: {
+        cityId: 1,
+        houseTypeId: 2,
+        houseCategoryId: 2,
+        surface: 66,
+        price: 350,
+        currencyId: 2,
+      },
+    });
+  }
 }
 
 main();
