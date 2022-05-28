@@ -9,6 +9,8 @@ import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import Pagination from '@mui/material/Pagination';
 import { KeyboardEvent, MouseEvent, useState } from 'react';
+import currencies from '../../../constants/currencies';
+import { houseCategories, houseTypes } from '../../../constants/houses';
 import PostForm from './PostForm';
 
 function Main({
@@ -50,6 +52,36 @@ function Main({
                 },
               })}
             >
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+              <p>
+                {
+                  houseTypes.find(
+                    (houseType) => houseType.id === item.house.houseTypeId
+                  )?.name
+                }
+              </p>
+              <p>
+                {
+                  houseCategories.find(
+                    (houseCategory) =>
+                      houseCategory.id === item.house.houseCategoryId
+                  )?.name
+                }
+              </p>
+              <p>
+                {item.house.surface} m<sup>2</sup>
+              </p>
+              <p>
+                {item.house.price}
+                {
+                  currencies.find(
+                    (currency) => currency.id === item.house.currencyId
+                  )?.name
+                }
+              </p>
+            </Card>
+          </Grid>
         );
       })
     );
