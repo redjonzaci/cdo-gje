@@ -12,6 +12,7 @@ export default function PostForm() {
       </FormControl>
       <FormControl fullWidth variant="standard">
         <TextField
+          id="description"
           margin="normal"
           label="Pershkrimi"
           multiline
