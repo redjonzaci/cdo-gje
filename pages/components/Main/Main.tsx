@@ -26,19 +26,17 @@ function Main({
   setIsPostFormVisible: Function;
 }) {
   const [pageNumber, setPageNumber] = useState(1);
+  const [posts, setPosts] = useState(items);
 
   let numberOfPages = 1;
-  if (items) {
-    numberOfPages = Math.ceil(items.length / itemsPerPage);
+  if (posts) {
+    numberOfPages = Math.ceil(posts.length / itemsPerPage);
   }
 
   function generateListOf(items: any[]) {
-    return items && items.map((item, index) => {
-      return (
-        <Grid item key={index} xs={itemWidth}>
-          <Card>{index}</Card>
-        </Grid>
-      );
+    return (
+      posts &&
+      posts.map((item, index) => {
     });
   }
 
@@ -109,7 +107,7 @@ function Main({
             <Grid item>
               <DialogTitle>Shto nje postim te ri</DialogTitle>
               <DialogContent>
-                <PostForm />
+                <PostForm setPosts={setPosts} />
               </DialogContent>
             </Grid>
           </Grid>
