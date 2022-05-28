@@ -55,7 +55,11 @@ function Home({
 export default Home;
 
 export async function getServerSideProps() {
-  const items = await prisma.house.findMany();
+  const items = await prisma.post.findMany({
+    include: {
+      house: true
+    }
+  });
 
   return {
     props: { items },

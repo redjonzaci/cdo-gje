@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model User {
@@ -31,8 +32,9 @@ model House {
   houseCategory   HouseCategory @relation(fields: [houseCategoryId], references: [id])
   surface         Int
   price           Int
-  Currency        Currency      @relation(fields: [currencyId], references: [id])
   currencyId      Int
+  currency        Currency      @relation(fields: [currencyId], references: [id])
+  post            Post?
 }
 
 model HouseType {
@@ -57,4 +59,12 @@ model Currency {
   id    Int     @id @default(autoincrement())
   name  String  @db.VarChar(255)
   House House[]
+}
+
+model Post {
+  id          Int    @id @default(autoincrement())
+  title       String @db.VarChar(255)
+  description String
+  house       House? @relation(fields: [houseId], references: [id])
+  houseId     Int    @unique
 }

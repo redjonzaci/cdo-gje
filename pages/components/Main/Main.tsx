@@ -4,12 +4,13 @@ import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import Pagination from '@mui/material/Pagination';
 import { KeyboardEvent, MouseEvent, useState } from 'react';
+import currencies from '../../../constants/currencies';
+import { houseCategories, houseTypes } from '../../../constants/houses';
 import PostForm from './PostForm';
 
 function Main({
@@ -26,20 +27,64 @@ function Main({
   setIsPostFormVisible: Function;
 }) {
   const [pageNumber, setPageNumber] = useState(1);
+  const [posts, setPosts] = useState(items);
 
   let numberOfPages = 1;
-  if (items) {
-    numberOfPages = Math.ceil(items.length / itemsPerPage);
+  if (posts) {
+    numberOfPages = Math.ceil(posts.length / itemsPerPage);
   }
 
   function generateListOf(items: any[]) {
-    return items && items.map((item, index) => {
-      return (
-        <Grid item key={index} xs={itemWidth}>
-          <Card>{index}</Card>
-        </Grid>
-      );
-    });
+    return (
+      posts &&
+      posts.map((item, index) => {
+        return (
+          <Grid item key={index} xs={itemWidth}>
+            <Card
+              className={css({
+                '&': {
+                  padding: '1rem',
+                  borderRadius: '1rem',
+                  boxShadow: `1px 1px 1.1px hsl(0deg 0% 0% / 0.33),
+              1.9px 1.9px 2px -1.7px hsl(0deg 0% 0% / 0.25),
+              8.1px 8.1px 8.6px -3.3px hsl(0deg 0% 0% / 0.16),
+              25px 25px 26.5px -5px hsl(0deg 0% 0% / 0.08)`,
+                },
+              })}
+            >
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+              <p>
+                {
+                  houseTypes.find(
+                    (houseType) => houseType.id === item.house.houseTypeId
+                  )?.name
+                }
+              </p>
+              <p>
+                {
+                  houseCategories.find(
+                    (houseCategory) =>
+                      houseCategory.id === item.house.houseCategoryId
+                  )?.name
+                }
+              </p>
+              <p>
+                {item.house.surface} m<sup>2</sup>
+              </p>
+              <p>
+                {item.house.price}
+                {
+                  currencies.find(
+                    (currency) => currency.id === item.house.currencyId
+                  )?.name
+                }
+              </p>
+            </Card>
+          </Grid>
+        );
+      })
+    );
   }
 
   function handleEnter(event: KeyboardEvent) {
@@ -107,9 +152,8 @@ function Main({
         <Container maxWidth="lg">
           <Grid container justifyContent="center">
             <Grid item>
-              <DialogTitle>Shto nje postim te ri</DialogTitle>
               <DialogContent>
-                <PostForm />
+                <PostForm setPosts={setPosts} />
               </DialogContent>
             </Grid>
           </Grid>
