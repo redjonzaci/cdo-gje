@@ -4,7 +4,6 @@ import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
@@ -105,7 +104,6 @@ function Main({
         <Container maxWidth="lg">
           <Grid container justifyContent="center">
             <Grid item>
-              <DialogTitle>Shto nje postim te ri</DialogTitle>
               <DialogContent>
                 <PostForm setPosts={setPosts} />
               </DialogContent>
