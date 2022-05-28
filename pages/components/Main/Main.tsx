@@ -36,7 +36,23 @@ function Main({
     return (
       posts &&
       posts.map((item, index) => {
-    });
+        return (
+          <Grid item key={index} xs={itemWidth}>
+            <Card
+              className={css({
+                '&': {
+                  padding: '1rem',
+                  borderRadius: '1rem',
+                  boxShadow: `1px 1px 1.1px hsl(0deg 0% 0% / 0.33),
+              1.9px 1.9px 2px -1.7px hsl(0deg 0% 0% / 0.25),
+              8.1px 8.1px 8.6px -3.3px hsl(0deg 0% 0% / 0.16),
+              25px 25px 26.5px -5px hsl(0deg 0% 0% / 0.08)`,
+                },
+              })}
+            >
+        );
+      })
+    );
   }
 
   function handleEnter(event: KeyboardEvent) {
