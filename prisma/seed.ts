@@ -96,19 +96,6 @@ async function main() {
       },
     ],
   });
-
-  for (let i = 0; i < 50; i++) {
-    await prisma.house.create({
-      data: {
-        cityId: 1,
-        houseTypeId: 2,
-        houseCategoryId: 2,
-        surface: 66,
-        price: 350,
-        currencyId: 2,
-      },
-    });
-  }
 }
 
 main();
