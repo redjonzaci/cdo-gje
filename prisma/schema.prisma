@@ -31,8 +31,8 @@ model House {
   houseCategory   HouseCategory @relation(fields: [houseCategoryId], references: [id])
   surface         Int
   price           Int
-  Currency        Currency      @relation(fields: [currencyId], references: [id])
   currencyId      Int
+  currency        Currency      @relation(fields: [currencyId], references: [id])
 }
 
 model HouseType {
