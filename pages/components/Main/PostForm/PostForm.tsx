@@ -156,7 +156,7 @@ export default function PostForm({ setPosts }: { setPosts: Function }) {
               </FormControl>
             </div>
             <Wrapper
-              apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
+              apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
               language="AL"
               region="AL"
             >
