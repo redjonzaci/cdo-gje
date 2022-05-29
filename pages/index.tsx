@@ -26,6 +26,10 @@ function Home({
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <title>Cdo Gje</title>
+        <meta
+          name="description"
+          content="Cdo Gje eshte faqja e vetme ku mund te postosh pa u munduar dhe ku shume thjesht mund te gjesh postime cilesore."
+        />
       </Head>
       <Header
         themeType={themeType}
