@@ -26,6 +26,10 @@ function Home({
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <title>Cdo Gje</title>
+        <meta
+          name="description"
+          content="Cdo Gje eshte faqja e vetme ku mund te postosh pa u munduar dhe ku shume thjesht mund te gjesh postime cilesore."
+        />
       </Head>
       <Header
         themeType={themeType}
@@ -57,8 +61,8 @@ export default Home;
 export async function getServerSideProps() {
   const items = await prisma.post.findMany({
     include: {
-      house: true
-    }
+      house: true,
+    },
   });
 
   return {

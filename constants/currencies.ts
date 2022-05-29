@@ -1,12 +1,12 @@
 const currencies = [
   {
     id: 1,
-    name: 'Lekë'
+    name: 'Lekë',
   },
   {
     id: 2,
-    name: 'Euro'
-  }
+    name: 'Euro',
+  },
 ];
 
 export default currencies;

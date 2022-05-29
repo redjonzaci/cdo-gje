@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { Wrapper } from '@googlemaps/react-wrapper';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -11,6 +12,7 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import axios, { AxiosError } from 'axios';
 import { FormEvent, useState } from 'react';
+import Map from '../../../../components/Map';
 import cities from '../../../../constants/cities';
 import currencies from '../../../../constants/currencies';
 import { houseCategories, houseTypes } from '../../../../constants/houses';
@@ -98,50 +100,72 @@ export default function PostForm({ setPosts }: { setPosts: Function }) {
             className={css({
               '&': {
                 display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'space-evenly',
               },
             })}
           >
-            <FormControl sx={{ width: '22ch' }}>
-              <InputLabel htmlFor="city">Qyteti</InputLabel>
-              <Select
-                id="city"
-                onChange={(event) => {
-                  setFormValues({
-                    ...formValues,
-                    cityId: parseInt(event.target.value as string),
-                  });
-                }}
-                value={formValues.cityId || ''}
-                variant="standard"
-              >
-                {cities.map((city) => (
-                  <MenuItem key={city.id} value={city.id}>
-                    {city.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl sx={{ width: '22ch' }}>
-              <InputLabel htmlFor="houseType">Veprimi</InputLabel>
-              <Select
-                id="houseType"
-                onChange={(event) => {
-                  setFormValues({
-                    ...formValues,
-                    houseTypeId: parseInt(event.target.value as string),
-                  });
-                }}
-                value={formValues.houseTypeId || ''}
-                variant="standard"
-              >
-                {houseTypes.map((houseType) => (
-                  <MenuItem key={houseType.id} value={houseType.id}>
-                    {houseType.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <div
+              className={css({
+                '&': {
+                  display: 'flex',
+                  justifyContent: 'space-evenly',
+                  marginBottom: '1rem',
+                },
+              })}
+            >
+              <FormControl sx={{ width: '22ch' }}>
+                <InputLabel htmlFor="houseType">Veprimi</InputLabel>
+                <Select
+                  id="houseType"
+                  onChange={(event) => {
+                    setFormValues({
+                      ...formValues,
+                      houseTypeId: parseInt(event.target.value as string),
+                    });
+                  }}
+                  value={formValues.houseTypeId || ''}
+                  variant="standard"
+                >
+                  {houseTypes.map((houseType) => (
+                    <MenuItem key={houseType.id} value={houseType.id}>
+                      {houseType.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl sx={{ width: '22ch' }}>
+                <InputLabel htmlFor="city">Qyteti</InputLabel>
+                <Select
+                  id="city"
+                  onChange={(event) => {
+                    setFormValues({
+                      ...formValues,
+                      cityId: parseInt(event.target.value as string),
+                    });
+                  }}
+                  value={formValues.cityId || ''}
+                  variant="standard"
+                >
+                  {cities.map((city) => (
+                    <MenuItem key={city.id} value={city.id}>
+                      {city.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+            <Wrapper
+              apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}
+              language="AL"
+              region="AL"
+            >
+              <Map
+                city={
+                  cities.find((city) => city.id === formValues.cityId)?.name
+                }
+              />
+            </Wrapper>
           </div>
           <div
             className={css({
