@@ -100,30 +100,61 @@ export default function PostForm({ setPosts }: { setPosts: Function }) {
             className={css({
               '&': {
                 display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'space-evenly',
               },
             })}
           >
-            <FormControl sx={{ width: '22ch' }}>
-              <InputLabel htmlFor="city">Qyteti</InputLabel>
-              <Select
-                id="city"
-                onChange={(event) => {
-                  setFormValues({
-                    ...formValues,
-                    cityId: parseInt(event.target.value as string),
-                  });
-                }}
-                value={formValues.cityId || ''}
-                variant="standard"
-              >
-                {cities.map((city) => (
-                  <MenuItem key={city.id} value={city.id}>
-                    {city.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <div
+              className={css({
+                '&': {
+                  display: 'flex',
+                  justifyContent: 'space-evenly',
+                  marginBottom: '1rem',
+                },
+              })}
+            >
+              <FormControl sx={{ width: '22ch' }}>
+                <InputLabel htmlFor="houseType">Veprimi</InputLabel>
+                <Select
+                  id="houseType"
+                  onChange={(event) => {
+                    setFormValues({
+                      ...formValues,
+                      houseTypeId: parseInt(event.target.value as string),
+                    });
+                  }}
+                  value={formValues.houseTypeId || ''}
+                  variant="standard"
+                >
+                  {houseTypes.map((houseType) => (
+                    <MenuItem key={houseType.id} value={houseType.id}>
+                      {houseType.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl sx={{ width: '22ch' }}>
+                <InputLabel htmlFor="city">Qyteti</InputLabel>
+                <Select
+                  id="city"
+                  onChange={(event) => {
+                    setFormValues({
+                      ...formValues,
+                      cityId: parseInt(event.target.value as string),
+                    });
+                  }}
+                  value={formValues.cityId || ''}
+                  variant="standard"
+                >
+                  {cities.map((city) => (
+                    <MenuItem key={city.id} value={city.id}>
+                      {city.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
             <Wrapper
               apiKey="AIzaSyCJXz0zegsi4OGd2x-Lxp_5cqN5dbK7dZA"
               language="AL"
@@ -135,26 +166,6 @@ export default function PostForm({ setPosts }: { setPosts: Function }) {
                 }
               />
             </Wrapper>
-            <FormControl sx={{ width: '22ch' }}>
-              <InputLabel htmlFor="houseType">Veprimi</InputLabel>
-              <Select
-                id="houseType"
-                onChange={(event) => {
-                  setFormValues({
-                    ...formValues,
-                    houseTypeId: parseInt(event.target.value as string),
-                  });
-                }}
-                value={formValues.houseTypeId || ''}
-                variant="standard"
-              >
-                {houseTypes.map((houseType) => (
-                  <MenuItem key={houseType.id} value={houseType.id}>
-                    {houseType.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
           </div>
           <div
             className={css({
