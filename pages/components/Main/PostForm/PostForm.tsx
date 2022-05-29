@@ -12,6 +12,7 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import axios, { AxiosError } from 'axios';
 import { FormEvent, useState } from 'react';
+import Map from '../../../../components/Map';
 import cities from '../../../../constants/cities';
 import currencies from '../../../../constants/currencies';
 import { houseCategories, houseTypes } from '../../../../constants/houses';
@@ -128,6 +129,11 @@ export default function PostForm({ setPosts }: { setPosts: Function }) {
               language="AL"
               region="AL"
             >
+              <Map
+                city={
+                  cities.find((city) => city.id === formValues.cityId)?.name
+                }
+              />
             </Wrapper>
             <FormControl sx={{ width: '22ch' }}>
               <InputLabel htmlFor="houseType">Veprimi</InputLabel>
