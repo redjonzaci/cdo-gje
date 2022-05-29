@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { Wrapper } from '@googlemaps/react-wrapper';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -122,6 +123,12 @@ export default function PostForm({ setPosts }: { setPosts: Function }) {
                 ))}
               </Select>
             </FormControl>
+            <Wrapper
+              apiKey="AIzaSyCJXz0zegsi4OGd2x-Lxp_5cqN5dbK7dZA"
+              language="AL"
+              region="AL"
+            >
+            </Wrapper>
             <FormControl sx={{ width: '22ch' }}>
               <InputLabel htmlFor="houseType">Veprimi</InputLabel>
               <Select
