@@ -13,6 +13,7 @@ import TextField from '@mui/material/TextField';
 import axios, { AxiosError } from 'axios';
 import { FormEvent, useState } from 'react';
 import Map from '../../../../components/Map';
+import Marker from '../../../../components/Marker';
 import cities from '../../../../constants/cities';
 import currencies from '../../../../constants/currencies';
 import { houseCategories, houseTypes } from '../../../../constants/houses';
@@ -25,6 +26,21 @@ export default function PostForm({ setPosts }: { setPosts: Function }) {
     houseCategoryId: 0,
     currencyId: 0,
   });
+  const [click, setClick] = useState<google.maps.LatLng>();
+  const [zoom, setZoom] = useState(15);
+  const [center, setCenter] = useState<google.maps.LatLngLiteral>({
+    lat: 0,
+    lng: 0,
+  });
+
+  const onClick = (e: google.maps.MapMouseEvent) => {
+    setClick(e.latLng!);
+  };
+
+  const onIdle = (m: google.maps.Map) => {
+    setZoom(m.getZoom()!);
+    setCenter(m.getCenter()!.toJSON());
+  };
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -161,10 +177,16 @@ export default function PostForm({ setPosts }: { setPosts: Function }) {
               region="AL"
             >
               <Map
+                center={center}
                 city={
                   cities.find((city) => city.id === formValues.cityId)?.name
                 }
-              />
+                onClick={onClick}
+                onIdle={onIdle}
+                zoom={zoom}
+              >
+                {click && <Marker position={click} />}
+              </Map>
             </Wrapper>
           </div>
           <div
