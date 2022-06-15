@@ -10,13 +10,13 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
-import axios, { AxiosError } from 'axios';
 import { FormEvent, useState } from 'react';
 import Map from '../../../../components/Map';
 import Marker from '../../../../components/Marker';
 import cities from '../../../../constants/cities';
 import currencies from '../../../../constants/currencies';
 import { houseCategories, houseTypes } from '../../../../constants/houses';
+import useFetch from '../../../api/useFetch';
 
 export default function PostForm({ setPosts }: { setPosts: Function }) {
   const [isHouseChecked, setIsHouseChecked] = useState(false);
@@ -42,6 +42,8 @@ export default function PostForm({ setPosts }: { setPosts: Function }) {
     setCenter(m.getCenter()!.toJSON());
   };
 
+  const { get, post } = useFetch();
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -52,26 +54,25 @@ export default function PostForm({ setPosts }: { setPosts: Function }) {
     const surfaceInput = form.elements.namedItem('surface') as HTMLInputElement;
     const priceInput = form.elements.namedItem('price') as HTMLInputElement;
 
-    axios
-      .post('/api/', {
-        title: titleInput.value,
-        description: descriptionInput.value,
-        cityId: formValues.cityId,
-        houseTypeId: formValues.houseTypeId,
-        houseCategoryId: formValues.houseCategoryId,
-        surface: parseInt(surfaceInput.value),
-        price: parseInt(priceInput.value),
-        currencyId: formValues.currencyId,
-      })
+    post('', {
+      title: titleInput.value,
+      description: descriptionInput.value,
+      cityId: formValues.cityId,
+      houseTypeId: formValues.houseTypeId,
+      houseCategoryId: formValues.houseCategoryId,
+      surface: parseInt(surfaceInput.value),
+      price: parseInt(priceInput.value),
+      currencyId: formValues.currencyId,
+    })
       .then((response) => {
-        console.log(response);
-        axios.get('/api/').then((response) => {
-          console.log(response);
-          setPosts(response.data);
+        console.log({ response });
+        get('').then((response) => {
+          console.log({ response });
+          setPosts(response);
         });
       })
-      .catch((error: AxiosError) => {
-        console.log(error);
+      .catch((error: Error) => {
+        console.log({ error });
       });
   }
 
