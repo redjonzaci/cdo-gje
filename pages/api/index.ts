@@ -26,12 +26,21 @@ export default async function handler(
         currencyId,
       },
     });
+    const post = await prisma.post.create({
+      data: {
+        title,
+        description,
+        houseId: house.id,
+      },
+    });
+
     res.json(
-      await prisma.post.create({
-        data: {
-          title,
-          description,
-          houseId: house.id,
+      await prisma.post.findFirst({
+        where: {
+          id: post.id,
+        },
+        include: {
+          house: true,
         },
       })
     );
