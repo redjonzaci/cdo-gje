@@ -1,15 +1,28 @@
 import { css } from '@emotion/css';
-import { useEffect, useRef, useState } from 'react';
+import {
+  Children,
+  cloneElement,
+  FC,
+  isValidElement,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
-export default function Map({ city }: { city: string | undefined }) {
+interface MapProps extends google.maps.MapOptions {
+  city: string | undefined;
+  center: google.maps.LatLngLiteral;
+  children: ReactNode;
+  onClick?: (e: google.maps.MapMouseEvent) => void;
+  onIdle?: (map: google.maps.Map) => void;
+}
+
+const Map: FC<MapProps> = ({ city, center, children, onClick, onIdle }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<google.maps.Map>();
   const geocoder = new google.maps.Geocoder();
-  const [cityCoordinates, setCityCoordinates] = useState({
-    // By default, coordinates of Tirana
-    lat: 41.327546,
-    lng: 19.818698,
-  });
+  const [marker, setMarker] = useState<google.maps.Marker>();
 
   useEffect(() => {
     if (city) {
@@ -19,7 +32,7 @@ export default function Map({ city }: { city: string | undefined }) {
         })
         .then((value: google.maps.GeocoderResponse) => {
           const location = value.results[0].geometry.location;
-          setCityCoordinates({ lat: location.lat(), lng: location.lng() });
+          map?.setCenter({ lat: location.lat(), lng: location.lng() });
         });
     }
   }, [city]);
@@ -29,7 +42,8 @@ export default function Map({ city }: { city: string | undefined }) {
       setMap(
         new window.google.maps.Map(ref.current, {
           zoom: 15,
-          center: cityCoordinates,
+          // By default coordinates of Tirana
+          center: { lat: 41.327546, lng: 19.818698 },
           mapTypeId: 'hybrid',
         })
       );
@@ -38,17 +52,43 @@ export default function Map({ city }: { city: string | undefined }) {
 
   useEffect(() => {
     if (map) {
-      map.setCenter(cityCoordinates);
+      map.setCenter(center);
     }
-  }, [cityCoordinates]);
+  }, [center]);
+
+  useEffect(() => {
+    if (map) {
+      ['click', 'idle'].forEach((eventName) =>
+        google.maps.event.clearListeners(map, eventName)
+      );
+
+      if (onClick) {
+        map.addListener('click', onClick);
+      }
+
+      if (onIdle) {
+        map.addListener('idle', () => onIdle(map));
+      }
+    }
+  }, [map, onClick, onIdle]);
 
   return (
-    <div
-      ref={ref}
-      className={css({
-        width: 500,
-        height: 500,
+    <>
+      <div
+        ref={ref}
+        className={css({
+          width: 500,
+          height: 500,
+        })}
+      />
+      {Children.map(children, (child) => {
+        if (isValidElement(child)) {
+          // Set the map prop on the child component
+          return cloneElement(child, { map });
+        }
       })}
-    />
+    </>
   );
-}
+};
+
+export default Map;
