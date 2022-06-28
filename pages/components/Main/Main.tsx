@@ -153,7 +153,7 @@ function Main({
           <Grid container justifyContent="center">
             <Grid item>
               <DialogContent>
-                <PostForm setPosts={setPosts} />
+                <PostForm posts={posts} setPosts={setPosts} />
               </DialogContent>
             </Grid>
           </Grid>

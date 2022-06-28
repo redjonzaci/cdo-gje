@@ -18,7 +18,13 @@ import currencies from '../../../../constants/currencies';
 import { houseCategories, houseTypes } from '../../../../constants/houses';
 import useFetch from '../../../api/useFetch';
 
-export default function PostForm({ setPosts }: { setPosts: Function }) {
+export default function PostForm({
+  posts,
+  setPosts,
+}: {
+  posts: any[];
+  setPosts: Function;
+}) {
   const [isHouseChecked, setIsHouseChecked] = useState(false);
   const [formValues, setFormValues] = useState({
     cityId: 0,
@@ -42,7 +48,7 @@ export default function PostForm({ setPosts }: { setPosts: Function }) {
     setCenter(m.getCenter()!.toJSON());
   };
 
-  const { get, post } = useFetch();
+  const { post } = useFetch();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -64,12 +70,9 @@ export default function PostForm({ setPosts }: { setPosts: Function }) {
       price: parseInt(priceInput.value),
       currencyId: formValues.currencyId,
     })
-      .then((response) => {
-        console.log({ response });
-        get('').then((response) => {
-          console.log({ response });
-          setPosts(response);
-        });
+      .then((newPost) => {
+        console.log({ newPost });
+        setPosts([...posts, newPost]);
       })
       .catch((error: Error) => {
         console.log({ error });
